@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watch HD Movies Box - Show Trailers & Watch Videos</title>
+    <meta name="description" content="Your ultimate movie trailer companion! Explore popular and upcoming films with HD trailers powered by TMDB and AI. Watch previews, get recommendations, and stay updated with the latest cinema releases.">
+    <link rel="icon" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #FF5252;
+            --secondary-color: #3D5AFE;
+            --dark-color: #121212;
+            --light-color: #FAFAFA;
+            --gray-color: #757575;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: var(--light-color);
+        }
+        
+        header {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: var(--primary-color);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 2rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--dark-color), #2c3e50);
+            color: white;
+            padding: 10rem 0 5rem;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .secondary-button {
+            background-color: transparent;
+            border: 2px solid white;
+            margin-left: 1rem;
+        }
+        
+        .app-preview {
+            display: flex;
+            justify-content: center;
+            margin-top: 3rem;
+            position: relative;
+        }
+        
+        .phone-frame {
+            position: relative;
+            z-index: 1;
+            margin: 0 -1.5rem;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            border-radius: 30px;
+            overflow: hidden;
+            transform: perspective(800px) rotateY(0deg);
+            transition: transform 0.5s;
+            width: 250px;
+        }
+        
+        .phone-frame:hover {
+            transform: perspective(800px) rotateY(5deg) translateY(-10px);
+        }
+        
+        .phone-frame:nth-child(2) {
+            z-index: 2;
+        }
+        
+        .phone-frame:nth-child(odd) {
+            transform: perspective(800px) rotateY(-5deg);
+        }
+        
+        .phone-frame:nth-child(odd):hover {
+            transform: perspective(800px) rotateY(0deg) translateY(-10px);
+        }
+        
+        .phone-frame img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 30px;
+        }
+        
+        .features {
+            padding: 6rem 0;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+        
+        .section-title p {
+            color: var(--gray-color);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background-color: var(--light-color);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background-color: rgba(255, 82, 82, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .feature-icon i {
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .feature-card p {
+            color: var(--gray-color);
+        }
+        
+        .screenshots {
+            padding: 6rem 0;
+            background-color: var(--light-color);
+        }
+        
+        .screenshots-slider {
+            display: flex;
+            overflow-x: auto;
+            gap: 1.5rem;
+            padding: 2rem 0;
+            -webkit-overflow-scrolling: touch;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+        }
+        
+        .screenshots-slider::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .screenshot-item {
+            flex: 0 0 auto;
+            width: 250px;
+            scroll-snap-align: center;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s;
+        }
+        
+        .screenshot-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .screenshot-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .testimonials {
+            padding: 6rem 0;
+            background-color: white;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .testimonial-card {
+            background-color: var(--light-color);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+        
+        .testimonial-text {
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            color: var(--dark-color);
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 1rem;
+        }
+        
+        .testimonial-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .testimonial-info h4 {
+            margin-bottom: 0.2rem;
+        }
+        
+        .testimonial-info p {
+            color: var(--gray-color);
+            font-size: 0.9rem;
+        }
+        
+        .contact {
+            padding: 6rem 0;
+            background-color: white;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .contact-card {
+            background-color: var(--light-color);
+            border-radius: 10px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            min-width: 280px;
+        }
+        
+        .contact-icon {
+            width: 80px;
+            height: 80px;
+            background-color: rgba(255, 82, 82, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .contact-icon i {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+        }
+        
+        .contact-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .contact-card p {
+            color: var(--gray-color);
+        }
+        
+        .contact-card a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .contact-card a:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+        
+        .download {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, var(--dark-color), #2c3e50);
+            color: white;
+            text-align: center;
+        }
+        
+        .download h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .download p {
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .store-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .store-button {
+            display: flex;
+            align-items: center;
+            background-color: white;
+            color: var(--dark-color);
+            padding: 0.8rem 1.5rem;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .store-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .store-button i {
+            font-size: 2rem;
+            margin-right: 1rem;
+        }
+        
+        .store-button-text {
+            text-align: left;
+        }
+        
+        .store-button-text span {
+            display: block;
+            font-size: 0.8rem;
+        }
+        
+        .store-button-text strong {
+            font-size: 1.2rem;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column ul li a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--primary-color);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .app-preview {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .phone-frame {
+                margin: 1rem 0;
+                width: 220px;
+            }
+            
+            .phone-frame:nth-child(odd) {
+                transform: perspective(800px) rotateY(0);
+            }
+            
+            .store-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cta-button, .secondary-button {
+                display: block;
+                margin: 1rem auto;
+                width: 80%;
+                text-align: center;
+            }
+            
+            nav {
+                display: none;
+            }
+        }
+    </style>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                Watch <span>HD Movies Box</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#screenshots">Screenshots</a></li>
+                    <li><a href="#download">Download</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <h1>Show Trailers & Watch Videos <span style="background: linear-gradient(90deg, #FF5252, #3D5AFE); color: white; border-radius: 8px; padding: 0.2em 0.7em; font-size: 1rem; margin-left: 0.5em; vertical-align: middle;">AI Powered</span></h1>
+                <p>Your ultimate movie trailer companion! Explore popular and upcoming films with HD trailers powered by TMDB and advanced AI.<br>
+                <strong>Get AI-powered recommendations and play the Guessing Movie game for a smarter, more fun experience!</strong></p>
+            </div>
+            <a href="#download" class="cta-button">Download Now</a>
+            <a href="#features" class="cta-button secondary-button">Learn More</a>
+            
+            <div class="app-preview">
+                <div class="phone-frame">
+                    <img src="images/Simulator Screenshot - iPhone 16 Pro Max - 2025-06-14 at 13.46.03.png" alt="HD Movies Box App Screenshot">
+                </div>
+                <div class="phone-frame">
+                    <img src="images/Simulator Screenshot - iPhone 16 Pro Max - 2025-06-14 at 13.47.15.png" alt="HD Movies Box App Screenshot">
+                </div>
+                <div class="phone-frame">
+                    <img src="images/Simulator Screenshot - iPhone 16 Pro Max - 2025-06-14 at 13.47.22.png" alt="HD Movies Box App Screenshot">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Amazing AI-Powered Features</h2>
+                <p>Watch HD Movies Box brings you the best trailers and previews, now enhanced with AI for smarter recommendations and interactive fun!</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>AI Recommendations</h3>
+                    <p>Get personalized movie and trailer suggestions powered by advanced AI algorithms for a smarter discovery experience.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h3>Guessing Movie Game (AI)</h3>
+                    <p>Challenge yourself with our AI-powered game: can you guess the movie from a trailer or clues? Fun for all movie lovers!</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-film"></i>
+                    </div>
+                    <h3>HD Movie Trailers</h3>
+                    <p>Stream HD movie trailers for popular, top-rated, and upcoming films. Enjoy previews in stunning high definition.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tv"></i>
+                    </div>
+                    <h3>TV Show Discovery</h3>
+                    <p>Watch TV show trailers and season teasers in high quality. Get detailed information including cast and reviews.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="screenshots" id="screenshots">
+        <div class="container">
+            <div class="section-title">
+                <h2>App Screenshots</h2>
+                <p>Take a look at our beautiful, AI-powered interface for the ultimate trailer and movie discovery experience!</p>
+            </div>
+            
+            <div class="screenshots-slider">
+                <div class="screenshot-item">
+                    <img src="images/Simulator Screenshot - iPhone 16 Pro Max - 2025-06-14 at 13.46.03.png" alt="HD Movies Box AI Feature Screenshot 1">
+                </div>
+                <div class="screenshot-item">
+                    <img src="images/Simulator Screenshot - iPhone 16 Pro Max - 2025-06-14 at 13.46.09.png" alt="HD Movies Box AI Feature Screenshot 2">
+                </div>
+                <div class="screenshot-item">
+                    <img src="images/Simulator Screenshot - iPhone 16 Pro Max - 2025-06-14 at 13.52.05.png" alt="HD Movies Box AI Feature Screenshot 3">
+                </div>
+                <div class="screenshot-item">
+                    <img src="images/Simulator Screenshot - iPhone 16 Pro Max - 2025-06-14 at 13.46.22.png" alt="HD Movies Box AI Feature Screenshot 4">
+                </div>
+                <div class="screenshot-item">
+                    <img src="images/Simulator Screenshot - iPhone 16 Pro Max - 2025-06-14 at 13.46.41.png" alt="HD Movies Box AI Feature Screenshot 5">
+                </div>
+                <div class="screenshot-item">
+                    <img src="images/Simulator Screenshot - iPhone 16 Pro Max - 2025-06-14 at 13.47.15.png" alt="HD Movies Box AI Feature Screenshot 6">
+                </div>
+                <div class="screenshot-item">
+                    <img src="images/Simulator Screenshot - iPhone 16 Pro Max - 2025-06-14 at 13.47.22.png" alt="HD Movies Box AI Feature Screenshot 7">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="download" id="download">
+        <div class="container">
+            <h2>Download Watch HD Movies Box Today</h2>
+            <p>Your personal AI-powered movie trailer hub. Discover, preview, and get recommendations for the latest cinema and streaming releases!</p>
+            
+            <div class="store-buttons">
+                <a href="https://apps.apple.com" class="store-button">
+                    <i class="fab fa-apple"></i>
+                    <div class="store-button-text">
+                        <span>Download on the</span>
+                        <strong>App Store</strong>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Us</h2>
+                <p>Have questions or feedback? We'd love to hear from you!</p>
+            </div>
+            
+            <div class="contact-info">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3>AnAn Entertainment</h3>
+                    <p>The creators of HD Movies Box</p>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email Us</h3>
+                    <p><a href="mailto:ananentertainment1601@gmail.com">ananentertainment1601@gmail.com</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>HD Movies Box</h3>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#screenshots">Screenshots</a></li>
+                        <li><a href="#download">Download</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Report a Bug</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">GDPR Compliance</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Connect</h3>
+                    <ul>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">YouTube</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 HD Movies Box. All rights reserved. This app uses The Movie Database API but is not endorsed or certified by TMDb.</p>
+            </div>
+        </div>
+    </footer> -->
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
