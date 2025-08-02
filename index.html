@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <title>CinemaFlix - AI Movie Discovery | Watch Full Movies & HD Content</title>
     <meta name="description" content="CinemaFlix - The world's first AI-powered full movie platform with interactive gaming. AI learns your taste, recommends movies, and challenges you with film guessing games. Your smart cinema companion!">
     <link rel="icon" href="favicon.png">
@@ -29,6 +31,7 @@
             line-height: 1.6;
             color: var(--dark-color);
             background-color: var(--light-color);
+            overflow-x: hidden; /* Prevent horizontal scroll on mobile */
         }
         
         header {
@@ -251,6 +254,9 @@
             -webkit-overflow-scrolling: touch;
             scroll-snap-type: x mandatory;
             scrollbar-width: none;
+            margin: 0 -1rem;
+            padding: 2rem 1rem;
+            position: relative;
         }
         
         .screenshots-slider::-webkit-scrollbar {
@@ -269,6 +275,27 @@
         
         .screenshot-item:hover {
             transform: scale(1.05);
+        }
+        
+        /* Mobile optimizations for screenshots */
+        @media (max-width: 768px) {
+            .screenshots-slider {
+                gap: 1rem;
+            }
+            
+            .screenshot-item {
+                width: 200px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .screenshots-slider {
+                gap: 0.8rem;
+            }
+            
+            .screenshot-item {
+                width: 180px;
+            }
         }
         
         .screenshot-item img {
@@ -491,6 +518,57 @@
             font-size: 0.9rem;
         }
         
+        /* Mobile Menu Styles */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1001;
+        }
+        
+        .hamburger {
+            display: block;
+            position: relative;
+            width: 24px;
+            height: 2px;
+            background-color: white;
+            transition: all 0.3s ease-in-out;
+        }
+        
+        .hamburger:before,
+        .hamburger:after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 2px;
+            background-color: white;
+            transition: all 0.3s ease-in-out;
+        }
+        
+        .hamburger:before {
+            top: -8px;
+        }
+        
+        .hamburger:after {
+            bottom: -8px;
+        }
+        
+        .menu-open .hamburger {
+            background-color: transparent;
+        }
+        
+        .menu-open .hamburger:before {
+            top: 0;
+            transform: rotate(45deg);
+        }
+        
+        .menu-open .hamburger:after {
+            bottom: 0;
+            transform: rotate(-45deg);
+        }
+        
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2.2rem;
@@ -513,6 +591,11 @@
             .store-buttons {
                 flex-direction: column;
                 align-items: center;
+                width: 100%;
+            }
+            
+            .store-buttons a {
+                width: 80%;
             }
             
             .cta-button, .secondary-button {
@@ -522,8 +605,183 @@
                 text-align: center;
             }
             
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
             nav {
-                display: none;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                height: 100vh;
+                background-color: var(--dark-color);
+                z-index: 1000;
+                transition: right 0.3s ease;
+                display: block;
+                padding-top: 60px;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+            }
+            
+            .menu-open nav {
+                right: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                padding: 20px;
+            }
+            
+            nav ul li {
+                margin: 0 0 15px 0;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .feature-card, .comparison-card {
+                padding: 1.5rem;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .features-grid, .testimonials-grid, .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-card {
+                width: 100%;
+            }
+            
+            /* Adjust modal for mobile */
+            #share-modal > div {
+                width: 95%;
+                padding: 1.5rem;
+            }
+        }
+        
+        /* Small mobile devices */
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .hero {
+                padding: 8rem 0 3rem;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+                text-align: center;
+            }
+            
+            .hero-tag {
+                margin-top: 0.5rem;
+                display: inline-block;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+                padding: 0 0.5rem;
+                text-align: center;
+            }
+            
+            .phone-frame {
+                width: 180px;
+            }
+            
+            .app-preview {
+                margin-top: 2rem;
+            }
+            
+            .section-title {
+                margin-bottom: 2.5rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.7rem;
+            }
+            
+            .section-title p {
+                font-size: 0.95rem;
+                padding: 0 0.5rem;
+            }
+            
+            .screenshots-slider {
+                gap: 0.8rem;
+            }
+            
+            .screenshot-item {
+                width: 180px;
+            }
+            
+            .download h2 {
+                font-size: 1.8rem;
+            }
+            
+            .logo {
+                font-size: 1.4rem;
+            }
+            
+            .social-share-button, .modal-share-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .feature-card, .comparison-card {
+                padding: 1.2rem;
+            }
+            
+            .feature-card h3, .comparison-card h3 {
+                font-size: 1.3rem;
+            }
+            
+            .feature-icon, .comparison-card div[style*="width: 60px"] {
+                width: 50px !important;
+                height: 50px !important;
+            }
+            
+            .feature-icon i, .comparison-card i {
+                font-size: 1.3rem !important;
+            }
+            
+            .features, .value-proposition, .screenshots, .testimonials, .download, .faq, .support, .share, .contact {
+                padding: 4rem 0;
+            }
+            
+            .faq-item h3 {
+                font-size: 1.2rem;
+            }
+            
+            .download-instructions {
+                padding: 1rem;
+            }
+            
+            .download-card {
+                padding: 1.2rem;
+            }
+            
+            /* Better touch targets for mobile */
+            nav ul li a, .cta-button, .store-button, .social-share-button, .modal-share-btn, .download-link {
+                padding-top: 0.7rem;
+                padding-bottom: 0.7rem;
+            }
+            
+            /* Improve spacing for mobile modals */
+            #share-modal > div {
+                padding: 1.2rem;
+            }
+            
+            .modal-social-buttons {
+                gap: 0.5rem;
+            }
+            
+            /* Better spacing for testimonials */
+            .testimonial-card {
+                padding: 1.5rem;
             }
         }
     </style>
@@ -535,6 +793,9 @@
             <div class="logo">
                 CinemaFlix <span>AI Full Movies</span>
             </div>
+            <button class="mobile-menu-toggle">
+                <span class="hamburger"></span>
+            </button>
             <nav>
                 <ul>
                     <li><a href="#features">Features</a></li>
@@ -551,15 +812,15 @@
 
     <section class="hero">
         <div class="container">
-            <div style="display: flex; flex-direction: column; align-items: center;">
-                <h1>AI-Powered Full HD Movies <span style="background: linear-gradient(90deg, #FF5252, #3D5AFE); color: white; border-radius: 8px; padding: 0.2em 0.7em; font-size: 1rem; margin-left: 0.5em; vertical-align: middle;">& Gaming</span></h1>
+            <div class="hero-content" style="display: flex; flex-direction: column; align-items: center;">
+                <h1>AI-Powered Full HD Movies <span class="hero-tag" style="background: linear-gradient(90deg, #FF5252, #3D5AFE); color: white; border-radius: 8px; padding: 0.2em 0.7em; font-size: 1rem; margin-left: 0.5em; vertical-align: middle; display: inline-block; margin-top: 0.5rem;">& Gaming</span></h1>
                 <p>The world's first AI-powered full movie platform that learns your taste and challenges your knowledge!<br>
                 <strong>Watch complete films through personalized AI recommendations and test yourself with adaptive movie guessing games.</strong></p>
             </div>
-            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-bottom: 1rem;">
+            <div class="hero-buttons" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-bottom: 1rem; margin-top: 1.5rem;">
                 <a href="#download" class="cta-button">Download Now</a>
                 <a href="#features" class="cta-button secondary-button">Learn More</a>
-                <a href="https://buymeacoffee.com/watchmoviesfree" target="_blank" style="display: inline-flex; align-items: center; background-color: #FFDD00; color: #000000; padding: 0.8rem 1.5rem; border-radius: 50px; text-decoration: none; font-weight: 600; transition: transform 0.3s, box-shadow 0.3s;">
+                <a href="https://buymeacoffee.com/watchmoviesfree" target="_blank" class="support-button" style="display: inline-flex; align-items: center; background-color: #FFDD00; color: #000000; padding: 0.8rem 1.5rem; border-radius: 50px; text-decoration: none; font-weight: 600; transition: transform 0.3s, box-shadow 0.3s; justify-content: center;">
                     <i class="fas fa-mug-hot" style="margin-right: 8px;"></i> Support Us
                 </a>
             </div>
@@ -732,16 +993,16 @@
                 </a>
             </div>
             
-            <div class="download-instructions" style="margin-top: 4rem; text-align: left; background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 12px;">
+            <div class="download-instructions" style="margin-top: 4rem; text-align: left; background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 12px;">
                 <h3 style="text-align: center; margin-bottom: 2rem; color: white;">Download Instructions</h3>
                 
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div class="download-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
                     <!-- iOS TestFlight Instructions -->
-                    <div style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 10px;">
-                        <h4 style="color: white; margin-bottom: 1rem; display: flex; align-items: center;">
+                    <div class="download-card" style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 10px;">
+                        <h4 style="color: white; margin-bottom: 1rem; display: flex; align-items: center; font-size: 1.1rem;">
                             <i class="fab fa-apple" style="margin-right: 10px;"></i> iOS Installation (TestFlight)
                         </h4>
-                        <ol style="color: rgba(255,255,255,0.8); padding-left: 1.5rem; margin-bottom: 0;">
+                        <ol style="color: rgba(255,255,255,0.8); padding-left: 1.5rem; margin-bottom: 0; font-size: 0.95rem;">
                             <li style="margin-bottom: 0.8rem;">Download <a href="https://apps.apple.com/us/app/testflight/id899247664" style="color: var(--primary-color);">TestFlight from the App Store</a></li>
                             <li style="margin-bottom: 0.8rem;">Open <a href="https://testflight.apple.com/join/SyGNZK12" style="color: var(--primary-color);">this TestFlight invitation link</a></li>
                             <li style="margin-bottom: 0.8rem;">Tap "Accept" for the CinemaFlix invitation</li>
@@ -750,16 +1011,16 @@
                             <li>Note: TestFlight builds expire after 90 days. You'll receive notifications when updates are available</li>
                         </ol>
                         <div style="margin-top: 1rem; text-align: center;">
-                            <a href="https://testflight.apple.com/join/SyGNZK12" style="color: var(--primary-color); text-decoration: none; font-weight: bold;">Get TestFlight Invitation →</a>
+                            <a href="https://testflight.apple.com/join/SyGNZK12" class="download-link" style="color: var(--primary-color); text-decoration: none; font-weight: bold; display: inline-block; padding: 0.5rem 1rem; border: 1px solid var(--primary-color); border-radius: 5px; transition: all 0.3s ease;">Get TestFlight Invitation →</a>
                         </div>
                     </div>
                     
                     <!-- Android APK Instructions -->
-                    <div style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 10px;">
-                        <h4 style="color: white; margin-bottom: 1rem; display: flex; align-items: center;">
+                    <div class="download-card" style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 10px;">
+                        <h4 style="color: white; margin-bottom: 1rem; display: flex; align-items: center; font-size: 1.1rem;">
                             <i class="fab fa-android" style="margin-right: 10px;"></i> Android Installation (APK)
                         </h4>
-                        <ol style="color: rgba(255,255,255,0.8); padding-left: 1.5rem; margin-bottom: 0;">
+                        <ol style="color: rgba(255,255,255,0.8); padding-left: 1.5rem; margin-bottom: 0; font-size: 0.95rem;">
                             <li style="margin-bottom: 0.8rem;"><a href="https://github.com/anan-entertainment/hd-movies-box/releases/download/release%2Fv1.0.0/app-release.apk" style="color: var(--primary-color);">Download the APK file directly</a></li>
                             <li style="margin-bottom: 0.8rem;">Before installation, enable "Install Unknown Apps" for your browser:
                                 <ul style="margin-top: 0.5rem; margin-bottom: 0.5rem; padding-left: 1.5rem;">
@@ -768,11 +1029,11 @@
                                 </ul>
                             </li>
                             <li style="margin-bottom: 0.8rem;">Open the downloaded APK file</li>
-                            <li style="margin-bottom: 0.8rem;">If Google Play Protect shows a warning, tap "Install Anyway" or "More details" then "Install Anyway"</li>
+                            <li style="margin-bottom: 0.8rem;">If Google Play Protect shows a warning, tap "Install Anyway"</li>
                             <li>Once installed, enjoy full access to CinemaFlix!</li>
                         </ol>
                         <div style="margin-top: 1rem; text-align: center;">
-                            <a href="https://github.com/anan-entertainment/hd-movies-box/releases/download/release%2Fv1.0.0/app-release.apk" style="color: var(--primary-color); text-decoration: none; font-weight: bold;">Download APK →</a>
+                            <a href="https://github.com/anan-entertainment/hd-movies-box/releases/download/release%2Fv1.0.0/app-release.apk" class="download-link" style="color: var(--primary-color); text-decoration: none; font-weight: bold; display: inline-block; padding: 0.5rem 1rem; border: 1px solid var(--primary-color); border-radius: 5px; transition: all 0.3s ease;">Download APK →</a>
                         </div>
                     </div>
                 </div>
@@ -902,7 +1163,7 @@
                     <h3 style="font-size: 1.8rem; margin-bottom: 1.5rem;">Spread the Word!</h3>
                     <p style="color: var(--gray-color); margin-bottom: 2rem;">Know someone who loves movies? Share CinemaFlix with them!</p>
                     
-                    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-bottom: 2rem;">
+                    <div class="social-share-buttons" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-bottom: 2rem;">
                         <!-- Share buttons -->
                         <a href="https://www.facebook.com/sharer/sharer.php?u=https://anan-entertainment.github.io/hd-movies-box/" target="_blank" class="social-share-button" style="background-color: #3b5998; color: white; padding: 0.8rem 1.5rem; border-radius: 8px; text-decoration: none; display: flex; align-items: center; transition: opacity 0.3s;">
                             <i class="fab fa-facebook-f" style="margin-right: 10px; font-size: 1.2rem;"></i>
@@ -924,9 +1185,9 @@
                     
                     <div style="margin-top: 2.5rem;">
                         <h4 style="margin-bottom: 1rem;">Or Copy Link</h4>
-                        <div style="display: flex; justify-content: center; gap: 0.5rem;">
-                            <input type="text" id="share-url" value="https://anan-entertainment.github.io/hd-movies-box/" readonly style="padding: 0.8rem; border-radius: 8px 0 0 8px; border: 1px solid #ddd; flex-grow: 1; max-width: 300px;">
-                            <button id="copy-link-button" style="background-color: #1DA1F2; color: white; border: none; border-radius: 0 8px 8px 0; padding: 0 1rem; cursor: pointer; transition: background-color 0.3s;">
+                        <div class="copy-link-container" style="display: flex; justify-content: center; gap: 0.5rem; width: 100%; max-width: 100%;">
+                            <input type="text" id="share-url" value="https://anan-entertainment.github.io/hd-movies-box/" readonly style="padding: 0.8rem; border-radius: 8px 0 0 8px; border: 1px solid #ddd; flex-grow: 1; min-width: 0; font-size: 14px;">
+                            <button id="copy-link-button" style="background-color: #1DA1F2; color: white; border: none; border-radius: 0 8px 8px 0; padding: 0 1rem; cursor: pointer; transition: background-color 0.3s; white-space: nowrap;">
                                 <i class="fas fa-copy"></i>
                             </button>
                         </div>
@@ -1047,20 +1308,20 @@
             
             <h3 style="margin-bottom: 1.5rem; text-align: center;">Share CinemaFlix</h3>
             
-            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-bottom: 2rem;">
-                <a href="https://www.facebook.com/sharer/sharer.php?u=https://anan-entertainment.github.io/hd-movies-box/" target="_blank" style="background-color: #3b5998; color: white; padding: 0.8rem 1.5rem; border-radius: 8px; text-decoration: none; display: flex; align-items: center; transition: opacity 0.3s;">
+            <div class="modal-social-buttons" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-bottom: 2rem;">
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://anan-entertainment.github.io/hd-movies-box/" target="_blank" class="modal-share-btn" style="background-color: #3b5998; color: white; padding: 0.8rem 1.5rem; border-radius: 8px; text-decoration: none; display: flex; align-items: center; transition: opacity 0.3s; flex: 1 1 auto; justify-content: center; min-width: 120px;">
                     <i class="fab fa-facebook-f" style="margin-right: 10px;"></i>
                     Facebook
                 </a>
-                <a href="https://twitter.com/intent/tweet?text=Check%20out%20CinemaFlix%20-%20AI-Powered%20Full%20HD%20Movies%20%26%20Gaming!%20https://anan-entertainment.github.io/hd-movies-box/" target="_blank" style="background-color: #1DA1F2; color: white; padding: 0.8rem 1.5rem; border-radius: 8px; text-decoration: none; display: flex; align-items: center; transition: opacity 0.3s;">
+                <a href="https://twitter.com/intent/tweet?text=Check%20out%20CinemaFlix%20-%20AI-Powered%20Full%20HD%20Movies%20%26%20Gaming!%20https://anan-entertainment.github.io/hd-movies-box/" target="_blank" class="modal-share-btn" style="background-color: #1DA1F2; color: white; padding: 0.8rem 1.5rem; border-radius: 8px; text-decoration: none; display: flex; align-items: center; transition: opacity 0.3s; flex: 1 1 auto; justify-content: center; min-width: 120px;">
                     <i class="fab fa-twitter" style="margin-right: 10px;"></i>
                     Twitter
                 </a>
-                <a href="https://wa.me/?text=Check%20out%20CinemaFlix%20-%20AI-Powered%20Full%20HD%20Movies%20%26%20Gaming!%20https://anan-entertainment.github.io/hd-movies-box/" target="_blank" style="background-color: #25D366; color: white; padding: 0.8rem 1.5rem; border-radius: 8px; text-decoration: none; display: flex; align-items: center; transition: opacity 0.3s;">
+                <a href="https://wa.me/?text=Check%20out%20CinemaFlix%20-%20AI-Powered%20Full%20HD%20Movies%20%26%20Gaming!%20https://anan-entertainment.github.io/hd-movies-box/" target="_blank" class="modal-share-btn" style="background-color: #25D366; color: white; padding: 0.8rem 1.5rem; border-radius: 8px; text-decoration: none; display: flex; align-items: center; transition: opacity 0.3s; flex: 1 1 auto; justify-content: center; min-width: 120px;">
                     <i class="fab fa-whatsapp" style="margin-right: 10px;"></i>
                     WhatsApp
                 </a>
-                <a href="https://telegram.me/share/url?url=https://anan-entertainment.github.io/hd-movies-box/&text=Check%20out%20CinemaFlix%20-%20AI-Powered%20Full%20HD%20Movies%20%26%20Gaming!" target="_blank" style="background-color: #0088cc; color: white; padding: 0.8rem 1.5rem; border-radius: 8px; text-decoration: none; display: flex; align-items: center; transition: opacity 0.3s;">
+                <a href="https://telegram.me/share/url?url=https://anan-entertainment.github.io/hd-movies-box/&text=Check%20out%20CinemaFlix%20-%20AI-Powered%20Full%20HD%20Movies%20%26%20Gaming!" target="_blank" class="modal-share-btn" style="background-color: #0088cc; color: white; padding: 0.8rem 1.5rem; border-radius: 8px; text-decoration: none; display: flex; align-items: center; transition: opacity 0.3s; flex: 1 1 auto; justify-content: center; min-width: 120px;">
                     <i class="fab fa-telegram-plane" style="margin-right: 10px;"></i>
                     Telegram
                 </a>
@@ -1068,9 +1329,9 @@
             
             <div>
                 <h4 style="margin-bottom: 1rem; text-align: center;">Or Copy Link</h4>
-                <div style="display: flex; justify-content: center; gap: 0.5rem;">
-                    <input type="text" id="modal-share-url" value="https://anan-entertainment.github.io/hd-movies-box/" readonly style="padding: 0.8rem; border-radius: 8px 0 0 8px; border: 1px solid #ddd; flex-grow: 1;">
-                    <button id="modal-copy-button" style="background-color: #1DA1F2; color: white; border: none; border-radius: 0 8px 8px 0; padding: 0 1rem; cursor: pointer; transition: background-color 0.3s;">
+                <div class="modal-copy-container" style="display: flex; justify-content: center; gap: 0.5rem; width: 100%;">
+                    <input type="text" id="modal-share-url" value="https://anan-entertainment.github.io/hd-movies-box/" readonly style="padding: 0.8rem; border-radius: 8px 0 0 8px; border: 1px solid #ddd; flex-grow: 1; min-width: 0; font-size: 14px;">
+                    <button id="modal-copy-button" style="background-color: #1DA1F2; color: white; border: none; border-radius: 0 8px 8px 0; padding: 0 1rem; cursor: pointer; transition: background-color 0.3s; white-space: nowrap;">
                         <i class="fas fa-copy"></i>
                     </button>
                 </div>
@@ -1082,6 +1343,23 @@
     </div>
 
     <script>
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+            const body = document.body;
+            
+            mobileMenuToggle.addEventListener('click', function() {
+                body.classList.toggle('menu-open');
+            });
+            
+            // Close mobile menu when a nav link is clicked
+            document.querySelectorAll('nav ul li a').forEach(link => {
+                link.addEventListener('click', function() {
+                    body.classList.remove('menu-open');
+                });
+            });
+        });
+        
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             // Skip if it's the share button or floating share trigger
@@ -1171,6 +1449,19 @@
                 }
             });
             
+            // Add touch feedback effects for mobile
+            document.querySelectorAll('.cta-button, .store-button, .social-share-button, .modal-share-btn, .download-link').forEach(button => {
+                button.addEventListener('touchstart', function() {
+                    this.style.opacity = '0.8';
+                    this.style.transform = 'scale(0.97)';
+                });
+                
+                button.addEventListener('touchend', function() {
+                    this.style.opacity = '1';
+                    this.style.transform = '';
+                });
+            });
+            
             // Copy to clipboard functionality (for main page)
             const copyLinkButton = document.getElementById('copy-link-button');
             const copyConfirmation = document.getElementById('copy-confirmation');
@@ -1233,6 +1524,11 @@
                 }, 2000);
             });
             
+            // Device detection for better optimizations
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+            const isAndroid = /Android/.test(navigator.userAgent);
+            
             // Native Share API (for mobile devices)
             function nativeShare() {
                 if (navigator.share) {
@@ -1249,7 +1545,12 @@
             }
             
             // Try native sharing first on mobile
-            if (window.innerWidth < 768) {
+            if (isMobile) {
+                // Add device-specific classes to body for CSS targeting
+                document.body.classList.add('mobile');
+                if (isIOS) document.body.classList.add('ios');
+                if (isAndroid) document.body.classList.add('android');
+                
                 shareButton.addEventListener('click', function(e) {
                     if (nativeShare()) {
                         e.preventDefault();
@@ -1263,6 +1564,31 @@
                         e.stopPropagation();
                     }
                 });
+                
+                // Make screenshots slider touch-friendly
+                const screenshotsSlider = document.querySelector('.screenshots-slider');
+                if (screenshotsSlider) {
+                    let touchStartX = 0;
+                    let touchEndX = 0;
+                    
+                    screenshotsSlider.addEventListener('touchstart', e => {
+                        touchStartX = e.changedTouches[0].screenX;
+                    }, {passive: true});
+                    
+                    screenshotsSlider.addEventListener('touchend', e => {
+                        touchEndX = e.changedTouches[0].screenX;
+                        const diffX = touchStartX - touchEndX;
+                        
+                        // Only apply smooth scrolling for swipe gestures
+                        if (Math.abs(diffX) > 30) {
+                            const scrollAmount = diffX > 0 ? 200 : -200;
+                            screenshotsSlider.scrollBy({
+                                left: scrollAmount,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }, {passive: true});
+                }
             }
         });
     </script>
