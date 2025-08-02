@@ -543,6 +543,7 @@
                     <li><a href="#faq">FAQ</a></li>
                     <li><a href="#support">Support Us</a></li>
                     <li><a href="#contact">Contact</a></li>
+                    <li><a href="#" id="share-button"><i class="fas fa-share-alt"></i> Share</a></li>
                 </ul>
             </nav>
         </div>
@@ -889,6 +890,65 @@
         </div>
     </section>
 
+    <section class="share" id="share" style="padding: 6rem 0; background-color: #E8F4F8;">
+        <div class="container">
+            <div class="section-title">
+                <h2>Share CinemaFlix</h2>
+                <p>Help others discover the world's first AI-powered full movie platform with interactive gaming!</p>
+            </div>
+            
+            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <div style="background-color: white; border-radius: 16px; padding: 3rem; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-bottom: 2rem;">
+                    <h3 style="font-size: 1.8rem; margin-bottom: 1.5rem;">Spread the Word!</h3>
+                    <p style="color: var(--gray-color); margin-bottom: 2rem;">Know someone who loves movies? Share CinemaFlix with them!</p>
+                    
+                    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-bottom: 2rem;">
+                        <!-- Share buttons -->
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=https://anan-entertainment.github.io/hd-movies-box/" target="_blank" class="social-share-button" style="background-color: #3b5998; color: white; padding: 0.8rem 1.5rem; border-radius: 8px; text-decoration: none; display: flex; align-items: center; transition: opacity 0.3s;">
+                            <i class="fab fa-facebook-f" style="margin-right: 10px; font-size: 1.2rem;"></i>
+                            Facebook
+                        </a>
+                        <a href="https://twitter.com/intent/tweet?text=Check%20out%20CinemaFlix%20-%20AI-Powered%20Full%20HD%20Movies%20%26%20Gaming!%20https://anan-entertainment.github.io/hd-movies-box/" target="_blank" class="social-share-button" style="background-color: #1DA1F2; color: white; padding: 0.8rem 1.5rem; border-radius: 8px; text-decoration: none; display: flex; align-items: center; transition: opacity 0.3s;">
+                            <i class="fab fa-twitter" style="margin-right: 10px; font-size: 1.2rem;"></i>
+                            Twitter
+                        </a>
+                        <a href="https://wa.me/?text=Check%20out%20CinemaFlix%20-%20AI-Powered%20Full%20HD%20Movies%20%26%20Gaming!%20https://anan-entertainment.github.io/hd-movies-box/" target="_blank" class="social-share-button" style="background-color: #25D366; color: white; padding: 0.8rem 1.5rem; border-radius: 8px; text-decoration: none; display: flex; align-items: center; transition: opacity 0.3s;">
+                            <i class="fab fa-whatsapp" style="margin-right: 10px; font-size: 1.2rem;"></i>
+                            WhatsApp
+                        </a>
+                        <a href="https://telegram.me/share/url?url=https://anan-entertainment.github.io/hd-movies-box/&text=Check%20out%20CinemaFlix%20-%20AI-Powered%20Full%20HD%20Movies%20%26%20Gaming!" target="_blank" class="social-share-button" style="background-color: #0088cc; color: white; padding: 0.8rem 1.5rem; border-radius: 8px; text-decoration: none; display: flex; align-items: center; transition: opacity 0.3s;">
+                            <i class="fab fa-telegram-plane" style="margin-right: 10px; font-size: 1.2rem;"></i>
+                            Telegram
+                        </a>
+                    </div>
+                    
+                    <div style="margin-top: 2.5rem;">
+                        <h4 style="margin-bottom: 1rem;">Or Copy Link</h4>
+                        <div style="display: flex; justify-content: center; gap: 0.5rem;">
+                            <input type="text" id="share-url" value="https://anan-entertainment.github.io/hd-movies-box/" readonly style="padding: 0.8rem; border-radius: 8px 0 0 8px; border: 1px solid #ddd; flex-grow: 1; max-width: 300px;">
+                            <button id="copy-link-button" style="background-color: #1DA1F2; color: white; border: none; border-radius: 0 8px 8px 0; padding: 0 1rem; cursor: pointer; transition: background-color 0.3s;">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                        <p id="copy-confirmation" style="color: #28a745; margin-top: 0.5rem; font-size: 0.9rem; visibility: hidden; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-check-circle" style="margin-right: 5px;"></i> Link copied to clipboard!
+                        </p>
+                    </div>
+                    
+                    <div style="margin-top: 2.5rem; background-color: #f8f9fa; border-radius: 12px; padding: 1.5rem;">
+                        <h4 style="margin-bottom: 0.8rem;">Why Share CinemaFlix?</h4>
+                        <ul style="text-align: left; color: var(--gray-color); padding-left: 1.5rem;">
+                            <li style="margin-bottom: 0.5rem;">Help friends discover amazing movies</li>
+                            <li style="margin-bottom: 0.5rem;">Grow our community of movie lovers</li>
+                            <li style="margin-bottom: 0.5rem;">Support our independent app development</li>
+                            <li>The more users we have, the better our AI recommendations become!</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="contact" id="contact">
         <div class="container">
             <div class="section-title">
@@ -972,16 +1032,73 @@
             <i class="fas fa-mug-hot" style="margin-right: 8px;"></i> Support Us
         </a>
     </div>
+    
+    <!-- Floating Share Button -->
+    <div id="floating-share-button" style="position: fixed; bottom: 20px; left: 20px; z-index: 1000; display: none;">
+        <a href="#" id="floating-share-trigger" style="display: flex; align-items: center; background-color: #1DA1F2; color: white; padding: 0.7rem 1.2rem; border-radius: 50px; text-decoration: none; font-weight: 600; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);">
+            <i class="fas fa-share-alt" style="margin-right: 8px;"></i> Share
+        </a>
+    </div>
+    
+    <!-- Share Modal -->
+    <div id="share-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 2000; justify-content: center; align-items: center;">
+        <div style="background-color: white; border-radius: 16px; padding: 2rem; max-width: 500px; width: 90%; position: relative;">
+            <button id="close-share-modal" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
+            
+            <h3 style="margin-bottom: 1.5rem; text-align: center;">Share CinemaFlix</h3>
+            
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-bottom: 2rem;">
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://anan-entertainment.github.io/hd-movies-box/" target="_blank" style="background-color: #3b5998; color: white; padding: 0.8rem 1.5rem; border-radius: 8px; text-decoration: none; display: flex; align-items: center; transition: opacity 0.3s;">
+                    <i class="fab fa-facebook-f" style="margin-right: 10px;"></i>
+                    Facebook
+                </a>
+                <a href="https://twitter.com/intent/tweet?text=Check%20out%20CinemaFlix%20-%20AI-Powered%20Full%20HD%20Movies%20%26%20Gaming!%20https://anan-entertainment.github.io/hd-movies-box/" target="_blank" style="background-color: #1DA1F2; color: white; padding: 0.8rem 1.5rem; border-radius: 8px; text-decoration: none; display: flex; align-items: center; transition: opacity 0.3s;">
+                    <i class="fab fa-twitter" style="margin-right: 10px;"></i>
+                    Twitter
+                </a>
+                <a href="https://wa.me/?text=Check%20out%20CinemaFlix%20-%20AI-Powered%20Full%20HD%20Movies%20%26%20Gaming!%20https://anan-entertainment.github.io/hd-movies-box/" target="_blank" style="background-color: #25D366; color: white; padding: 0.8rem 1.5rem; border-radius: 8px; text-decoration: none; display: flex; align-items: center; transition: opacity 0.3s;">
+                    <i class="fab fa-whatsapp" style="margin-right: 10px;"></i>
+                    WhatsApp
+                </a>
+                <a href="https://telegram.me/share/url?url=https://anan-entertainment.github.io/hd-movies-box/&text=Check%20out%20CinemaFlix%20-%20AI-Powered%20Full%20HD%20Movies%20%26%20Gaming!" target="_blank" style="background-color: #0088cc; color: white; padding: 0.8rem 1.5rem; border-radius: 8px; text-decoration: none; display: flex; align-items: center; transition: opacity 0.3s;">
+                    <i class="fab fa-telegram-plane" style="margin-right: 10px;"></i>
+                    Telegram
+                </a>
+            </div>
+            
+            <div>
+                <h4 style="margin-bottom: 1rem; text-align: center;">Or Copy Link</h4>
+                <div style="display: flex; justify-content: center; gap: 0.5rem;">
+                    <input type="text" id="modal-share-url" value="https://anan-entertainment.github.io/hd-movies-box/" readonly style="padding: 0.8rem; border-radius: 8px 0 0 8px; border: 1px solid #ddd; flex-grow: 1;">
+                    <button id="modal-copy-button" style="background-color: #1DA1F2; color: white; border: none; border-radius: 0 8px 8px 0; padding: 0 1rem; cursor: pointer; transition: background-color 0.3s;">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+                <p id="modal-copy-confirmation" style="color: #28a745; margin-top: 0.5rem; font-size: 0.9rem; text-align: center; visibility: hidden; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-check-circle" style="margin-right: 5px;"></i> Link copied to clipboard!
+                </p>
+            </div>
+        </div>
+    </div>
 
     <script>
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            // Skip if it's the share button or floating share trigger
+            if (anchor.id === 'share-button' || anchor.id === 'floating-share-trigger') {
+                return;
+            }
+            
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
+                const href = this.getAttribute('href');
                 
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                // Only scroll if href points to an existing element
+                if (href !== '#' && document.querySelector(href)) {
+                    document.querySelector(href).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
             });
         });
         
@@ -998,6 +1115,154 @@
                 bmcButton.style.display = 'block';
             } else {
                 bmcButton.style.display = 'none';
+            }
+            
+            // Show/hide floating Share button
+            const floatingShareButton = document.getElementById('floating-share-button');
+            const shareSection = document.getElementById('share');
+            const shareSectionTop = shareSection.offsetTop;
+            const shareSectionBottom = shareSectionTop + shareSection.offsetHeight;
+            
+            // Show button when not in the share section and scrolled past the hero
+            if (window.pageYOffset > 500 && 
+                (window.pageYOffset < shareSectionTop - 300 || window.pageYOffset > shareSectionBottom)) {
+                floatingShareButton.style.display = 'block';
+            } else {
+                floatingShareButton.style.display = 'none';
+            }
+        });
+        
+        // Share functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Modal functionality
+            const shareModal = document.getElementById('share-modal');
+            const shareButton = document.getElementById('share-button');
+            const floatingShareTrigger = document.getElementById('floating-share-trigger');
+            const closeShareModal = document.getElementById('close-share-modal');
+            
+            // Functions to handle modal
+            function openShareModal() {
+                shareModal.style.display = 'flex';
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            }
+            
+            function closeShareModalFunction() {
+                shareModal.style.display = 'none';
+                document.body.style.overflow = ''; // Enable scrolling
+            }
+            
+            // Event listeners for opening/closing modal
+            shareButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                openShareModal();
+            });
+            
+            floatingShareTrigger.addEventListener('click', function(e) {
+                e.preventDefault();
+                openShareModal();
+            });
+            
+            closeShareModal.addEventListener('click', closeShareModalFunction);
+            
+            // Close modal when clicking outside of it
+            shareModal.addEventListener('click', function(e) {
+                if (e.target === shareModal) {
+                    closeShareModalFunction();
+                }
+            });
+            
+            // Copy to clipboard functionality (for main page)
+            const copyLinkButton = document.getElementById('copy-link-button');
+            const copyConfirmation = document.getElementById('copy-confirmation');
+            const shareUrl = document.getElementById('share-url');
+            
+            copyLinkButton.addEventListener('mouseover', function() {
+                this.style.backgroundColor = '#0b7bc1'; // Darker blue on hover
+            });
+            
+            copyLinkButton.addEventListener('mouseout', function() {
+                this.style.backgroundColor = '#1DA1F2'; // Back to original blue
+            });
+            
+            copyLinkButton.addEventListener('click', function() {
+                shareUrl.select();
+                document.execCommand('copy');
+                
+                // Change button style temporarily to indicate success
+                const originalIcon = this.innerHTML;
+                this.innerHTML = '<i class="fas fa-check"></i>';
+                this.style.backgroundColor = '#28a745'; // Green for success
+                
+                copyConfirmation.style.visibility = 'visible';
+                
+                setTimeout(function() {
+                    copyLinkButton.innerHTML = originalIcon;
+                    copyLinkButton.style.backgroundColor = '#1DA1F2';
+                    copyConfirmation.style.visibility = 'hidden';
+                }, 2000);
+            });
+            
+            // Copy to clipboard functionality (for modal)
+            const modalCopyButton = document.getElementById('modal-copy-button');
+            const modalCopyConfirmation = document.getElementById('modal-copy-confirmation');
+            const modalShareUrl = document.getElementById('modal-share-url');
+            
+            modalCopyButton.addEventListener('mouseover', function() {
+                this.style.backgroundColor = '#0b7bc1'; // Darker blue on hover
+            });
+            
+            modalCopyButton.addEventListener('mouseout', function() {
+                this.style.backgroundColor = '#1DA1F2'; // Back to original blue
+            });
+            
+            modalCopyButton.addEventListener('click', function() {
+                modalShareUrl.select();
+                document.execCommand('copy');
+                
+                // Change button style temporarily to indicate success
+                const originalIcon = this.innerHTML;
+                this.innerHTML = '<i class="fas fa-check"></i>';
+                this.style.backgroundColor = '#28a745'; // Green for success
+                
+                modalCopyConfirmation.style.visibility = 'visible';
+                
+                setTimeout(function() {
+                    modalCopyButton.innerHTML = originalIcon;
+                    modalCopyButton.style.backgroundColor = '#1DA1F2';
+                    modalCopyConfirmation.style.visibility = 'hidden';
+                }, 2000);
+            });
+            
+            // Native Share API (for mobile devices)
+            function nativeShare() {
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'CinemaFlix - AI-Powered Full HD Movies & Gaming',
+                        text: 'Check out CinemaFlix - the world\'s first AI-powered full movie platform with interactive gaming!',
+                        url: 'https://anan-entertainment.github.io/hd-movies-box/',
+                    })
+                    .then(() => console.log('Successful share'))
+                    .catch((error) => console.log('Error sharing', error));
+                    return true;
+                }
+                return false;
+            }
+            
+            // Try native sharing first on mobile
+            if (window.innerWidth < 768) {
+                shareButton.addEventListener('click', function(e) {
+                    if (nativeShare()) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                });
+                
+                floatingShareTrigger.addEventListener('click', function(e) {
+                    if (nativeShare()) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                });
             }
         });
     </script>
